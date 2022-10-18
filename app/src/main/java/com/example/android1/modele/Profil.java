@@ -8,8 +8,6 @@ public class Profil {
     private static final Integer minHomme = 10;
     private static final Integer maxHomme = 25;
 
-
-
     //propriétés
     private Integer poids;
     private Integer taile;
@@ -23,6 +21,8 @@ public class Profil {
         this.taile = taile;
         this.age = age;
         this.sexe = sexe;
+        this.calculMG();
+        this.resultIMG();
     }
 
     public Integer getPoids() {
@@ -48,8 +48,26 @@ public class Profil {
     public String getMessage() {
         return message;
     }
-    private void calculMG() {
+
+    private void calculMG() {               //methode de calcul IMG
         float tailem = ((float)taile)/100;
         this.img = (float) ((1.2*poids / (tailem*tailem)) + (0.23*age) - (1083*sexe) - 5.4);
+    }
+    //methode d'afficher du résultats img
+    private void resultIMG(){
+        Integer min;
+        Integer max;
+        if (sexe==0){           //femme
+            min = minFemme;
+            max = maxFemme;
+        }else{                  //homme
+            min = minHomme;
+            max = maxHomme;
+        }
+         if(img<min){           //message correspondant
+             message = "trop faible";
+         }else{
+             message = "trop élevé";
+         }
     }
 }
